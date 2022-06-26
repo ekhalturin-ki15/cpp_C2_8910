@@ -9,62 +9,41 @@ void change(const int& ptr)
 	//ptr = 100;
 }
 
-
-
-
 int change()
 {
-
-	return 1'000'000'000'000;
+	return 100;
 }
-
-struct My_String
-{
-	char* ch;
-	int size;
-
-	int get_size()
-	{
-		int ret = 0;
-		while (true)
-		{
-			if (ch[ret++] == '\0') return ret - 1;
-
-		}
-	}
-
-
-};
-
 
 int main()
 {
 	ios_base::sync_with_stdio(0);
 	cin.tie(0);
 
-	//SFML
-	
-	FILE* IN, * OUT;
 
-	freopen_s(&IN, "input.txt", "r", stdin);
-	freopen_s(&OUT, "output.txt", "w", stdout);
-	
+	FILE *IN, *OUT;
 
-	My_String a, b, c;
+	freopen_s(&IN, "input.txt","r", stdin);
+	freopen_s(&OUT, "output.txt","w", stdout);
 
-	char* &it =  a.ch;
+	change();
 
-	cin >> a.size;
-
-	a.ch = new char[a.size];
-
-	int i = 0;
-	for (; i < 26; ++i)
+	if (8*4)
 	{
-		a.ch[i] = i + 'a';
+		cout 
+			<<
+			"YES";
 	}
-	a.ch[i] = '\0';
+	else
+	{
+		0;
+	}
 
-	delete [] a.ch;
+
+
+
+	cout << 
+		(0 	?	"YES"	:
+		"0"
+		);
 
 }
