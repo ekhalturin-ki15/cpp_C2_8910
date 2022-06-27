@@ -1,16 +1,36 @@
 #include <iostream>
 #include <vector>
+#include <queue>
+
 #include <algorithm>
+#include <list>
 
 using namespace std;
 
 
 //Компаратор структура
 
+void sum(int& a) // & оригинал
+//Без & - копия
+{
+    a = 100;
+}
+
 bool cmp(int l, int r)
 {
     return l > r;
 }
+
+
+struct Hard_CMP
+{
+    int x;
+
+    bool operator () (int l, int r)
+    {
+        return abs(l-x) < abs(r - x);
+    }
+};
 
 
 int main()
@@ -21,78 +41,127 @@ int main()
     freopen_s(&OUT, "output.txt", "w", stdout);
 #endif // _DEBUG
 
-    int n, m; (n - 1) / m;
-
     vector<int> v;
-    int a;
+    auto a = 0;
+    auto af = 0.f;
+    auto ad = 0.;
+    auto all = 0ll;
+    auto aull = 0ull;
+
 
     while (cin >> a)
     {
         v.push_back(a);
     }
 
+    //int size;
+    //int d[size];
 
-    for (int pos_max = 0; pos_max < v.size() - 1; ++pos_max)
+    v.pop_back();
+
+
+    deque<int> d;
+
+    d.push_front(23);
+    d.pop_front();
+
+    // v[i]
+
+    cout << "\n";
+
+    for (auto& it : v) // range-based // iterator
     {
-        int pos = pos_max;
-        int cur_max = v[pos];
-
-        for (int i = pos_max + 1; i < v.size(); ++i)
-        {
-            if (cmp(v[i], v[pos]))
-            {
-                cur_max = v[i];
-                pos = i;
-            }
-        }
-
-        // pos_max pos
-        //std::swap(v[pos], v[pos_max]);
-
-        //int temp = v[pos];
-        //v[pos] = v[pos_max];
-        //v[pos_max] = temp;
-
-        //a//
-        if (pos_max != pos)
-        {
-            v[pos_max] = v[pos_max] ^ v[pos];
-            ////b
-            v[pos] = v[pos] ^ v[pos_max]; // a изн
-            v[pos_max] = v[pos_max] ^ v[pos]; // b изн
-        }
+        //int& it = v.begin()  v.end();
+        cin >> it;
     }
 
-    //for (int i = 0; i < v.size(); ++i)
-     //   cout << v[i] << " ";
+    for (auto it : v) // range-based // iterator
+    {
+        //int& it = v.begin()  v.end();
+        //cin >> it;
+        cout << it << " ";
+    }
+    cout << "\n";
 
 
-    vector<int>::iterator it;
-
-    v.begin();
-    v.end();
-
-    v.rbegin();
-    v.rend();
+    return 0;
 
 
-    it = v.begin();
+    vector<int>::iterator it = v.begin();
 
-    it++;
-
-
-    
-    //vector<int>::reverse_iterator rit;
+    auto et = v.begin();
 
 
 
 
 
+    Hard_CMP five, dec;
+    five.x = 5;
+    dec.x = 10;
+
+
+    sort(v.begin(), v.end(), five);
+
+
+    for (int i = 0; i < v.size(); ++i)
+        cout << v[i] << " ";
+
+    cout << "\n";
+
+    //cout << endl;
+    //
+    //cout << "\n";
+    //cout.flush();
+    //
+
+    //cin.ignore();
+
+    sort(v.begin(), v.end(), dec);
+
+    for (int i = 0; i < v.size(); ++i)
+        cout << v[i] << " ";
+
+   // vector<int>::iterator it;
+
+   // v.begin();
+   // v.end();
+
+   // v.rbegin();
+   // v.rend();
+
+   // list<int> ls; // 
+   // 
 
 
 
 
-   // n / m;
+
+   // it = v.begin();
+
+   // cout << (*it) << " ";
+
+
+   // it++;
+   // cout << *(it + 5) << " ";
+
+   // cout << *(next(it, 5));
+
+   // prev(it, 5);
+
+   // advance(it, -5);
+
+   // 
+   // //vector<int>::reverse_iterator rit;
+
+
+
+
+
+
+
+
+
+   //// n / m;
 
 
 
