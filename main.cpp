@@ -8,9 +8,18 @@ struct AAA
 {
     int x;
 
+    int* a;
+
     AAA() //Конструктор
     {
         x = -1;
+        a = new int[100];
+    }
+
+    ~AAA()
+    {
+        delete[] a;
+        cout << x << "\n";
     }
 
     AAA(int a)
@@ -42,6 +51,7 @@ int main()
 
     AAA b;
 
+    b.x = 10;
 
     AAA* d;
 
