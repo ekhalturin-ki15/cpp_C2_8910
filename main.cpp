@@ -9,8 +9,8 @@ using namespace std;
 
 
 //Компаратор структура
-
-void sum(int& a) // & оригинал
+//void sum(int a&) // & оригинал
+void sum(int &a) // & оригинал
 //Без & - копия
 {
     a = 100;
@@ -41,117 +41,24 @@ int main()
     freopen_s(&OUT, "output.txt", "w", stdout);
 #endif // _DEBUG
 
-    vector<int> v;
-    auto a = 0;
-    auto af = 0.f;
-    auto ad = 0.;
-    auto all = 0ll;
-    auto aull = 0ull;
 
+    //auto a = min(1, 0);
 
-    while (cin >> a)
+    //auto b = max(1., 0.);
+
+    
+    vector<int> v = {5 , 4 , 2 , 3 , 1};
+
+    sort(v.begin(), v.end());
+
+    do
     {
-        v.push_back(a);
-    }
-
-    //int size;
-    //int d[size];
-
-    v.pop_back();
+        for (auto it : v)
+            cout << it << " ";
+        cout << "\n";
 
 
-    deque<int> d;
-
-    d.push_front(23);
-    d.pop_front();
-
-    // v[i]
-
-    cout << "\n";
-
-    for (auto& it : v) // range-based // iterator
-    {
-        //int& it = v.begin()  v.end();
-        cin >> it;
-    }
-
-    for (auto it : v) // range-based // iterator
-    {
-        //int& it = v.begin()  v.end();
-        //cin >> it;
-        cout << it << " ";
-    }
-    cout << "\n";
-
-
-    return 0;
-
-
-    vector<int>::iterator it = v.begin();
-
-    auto et = v.begin();
-
-
-
-
-
-    Hard_CMP five, dec;
-    five.x = 5;
-    dec.x = 10;
-
-
-    sort(v.begin(), v.end(), five);
-
-
-    for (int i = 0; i < v.size(); ++i)
-        cout << v[i] << " ";
-
-    cout << "\n";
-
-    //cout << endl;
-    //
-    //cout << "\n";
-    //cout.flush();
-    //
-
-    //cin.ignore();
-
-    sort(v.begin(), v.end(), dec);
-
-    for (int i = 0; i < v.size(); ++i)
-        cout << v[i] << " ";
-
-   // vector<int>::iterator it;
-
-   // v.begin();
-   // v.end();
-
-   // v.rbegin();
-   // v.rend();
-
-   // list<int> ls; // 
-   // 
-
-
-
-
-
-   // it = v.begin();
-
-   // cout << (*it) << " ";
-
-
-   // it++;
-   // cout << *(it + 5) << " ";
-
-   // cout << *(next(it, 5));
-
-   // prev(it, 5);
-
-   // advance(it, -5);
-
-   // 
-   // //vector<int>::reverse_iterator rit;
+    } while (next_permutation(v.begin(), v.end()));
 
 
 
@@ -159,10 +66,13 @@ int main()
 
 
 
+    //for (auto it : v)
+    //    cout << it << " ";
 
 
-   //// n / m;
 
 
+
+    
 
 }
