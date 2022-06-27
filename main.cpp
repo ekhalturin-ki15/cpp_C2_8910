@@ -6,7 +6,18 @@ using namespace std;
 
 struct AAA
 {
-    int x = 10;
+    int x;
+
+    AAA() //Конструктор
+    {
+        x = -1;
+    }
+
+    AAA(int a)
+    {
+        x = a;
+    }
+
 
     void Out()
     {
@@ -26,47 +37,44 @@ int main()
     freopen_s(&OUT, "output.txt", "w", stdout);
 #endif // _DEBUG
 
+
+    int aa;
+
     AAA b;
+
+
+    AAA* d;
+
+    d = new AAA[100]; // Вызов кода из 13 строки
+
+    delete[] d;
+
+
+    b.x = 10;
+
+    return 0;
     //AAA<char> a;
 
     //int n;
     //cin >> n;
-    vector<int> v;
+    vector< int > v(32);
 
     int a;
     while (cin >> a)
     {
-        v.push_back(a);
+        v.push_back(a); // O(1)
+        cout << v.size() << " ";
+        cout << v.capacity() << "\n";
     }
 
-    cout << v.size();
+    v.resize(10);
 
+    for (int i = 0; i < 10; ++i)
+    {
+        cout << v[i];
+    }
 
-    //v.resize(n);
-
-    //for (int i = 0; i < n; ++i)
-        //cin >> v[i];
-
-    //vector<  int  > v;
-
-    ////v.push_back(10);
-
-    ////size_t;
-    ////unsigned long long a = v.size();
-
-    //v.resize(1000);
-
-
-
-    //// [10] //*(v + 10)
-
-
-    //v[10] = 99;
-    //cout << v[10] << " " << v[0] <<"\n";
-
-    //v.push_back(10);
-
-    //cout << v.size();
+    
 
 
 }
