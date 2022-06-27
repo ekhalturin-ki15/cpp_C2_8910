@@ -4,87 +4,96 @@
 
 using namespace std;
 
-struct AAA
+
+//Компаратор структура
+
+bool cmp(int l, int r)
 {
-    int x;
-
-    int* a;
-
-    AAA() //Конструктор
-    {
-        x = -1;
-        a = new int[100];
-    }
-
-    ~AAA()
-    {
-        delete[] a;
-        cout << x << "\n";
-    }
-
-    AAA(int a)
-    {
-        x = a;
-    }
-
-
-    void Out()
-    {
-        cout << x;
-    }
-
-
-};
+    return l > r;
+}
 
 
 int main()
 {
-
 #ifdef _DEBUG
     FILE* IN, * OUT;
     freopen_s(&IN, "input.txt", "r", stdin);
     freopen_s(&OUT, "output.txt", "w", stdout);
 #endif // _DEBUG
 
+    int n, m; (n - 1) / m;
 
-    int aa;
-
-    AAA b;
-
-    b.x = 10;
-
-    AAA* d;
-
-    d = new AAA[100]; // Вызов кода из 13 строки
-
-    delete[] d;
-
-
-    b.x = 10;
-
-    return 0;
-    //AAA<char> a;
-
-    //int n;
-    //cin >> n;
-    vector< int > v(32);
-
+    vector<int> v;
     int a;
+
     while (cin >> a)
     {
-        v.push_back(a); // O(1)
-        cout << v.size() << " ";
-        cout << v.capacity() << "\n";
+        v.push_back(a);
     }
 
-    v.resize(10);
 
-    for (int i = 0; i < 10; ++i)
+    for (int pos_max = 0; pos_max < v.size() - 1; ++pos_max)
     {
-        cout << v[i];
+        int pos = pos_max;
+        int cur_max = v[pos];
+
+        for (int i = pos_max + 1; i < v.size(); ++i)
+        {
+            if (cmp(v[i], v[pos]))
+            {
+                cur_max = v[i];
+                pos = i;
+            }
+        }
+
+        // pos_max pos
+        //std::swap(v[pos], v[pos_max]);
+
+        //int temp = v[pos];
+        //v[pos] = v[pos_max];
+        //v[pos_max] = temp;
+
+        //a//
+        if (pos_max != pos)
+        {
+            v[pos_max] = v[pos_max] ^ v[pos];
+            ////b
+            v[pos] = v[pos] ^ v[pos_max]; // a изн
+            v[pos_max] = v[pos_max] ^ v[pos]; // b изн
+        }
     }
+
+    //for (int i = 0; i < v.size(); ++i)
+     //   cout << v[i] << " ";
+
+
+    vector<int>::iterator it;
+
+    v.begin();
+    v.end();
+
+    v.rbegin();
+    v.rend();
+
+
+    it = v.begin();
+
+    it++;
+
 
     
+    //vector<int>::reverse_iterator rit;
+
+
+
+
+
+
+
+
+
+   // n / m;
+
 
 
 }
