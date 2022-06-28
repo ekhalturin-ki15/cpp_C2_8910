@@ -27,9 +27,53 @@ struct BigInt
         {
             num.push_back(startString[i] - '0');
         }
+    }
 
+    void Read()
+    {
+        string s;
+        cin >> s;
+        Init(s);
+    }
+
+    void Out()
+    {
+        for (int i = 0; i < num.size(); ++i)
+        {
+            cout << num[i];
+        }
+        cout << "\n";
     }
 };
+
+//BigInt Sum(BigInt& a, BigInt& b)
+BigInt Sum(BigInt a, BigInt b)
+{
+    BigInt result;
+
+    if (a.sign == b.sign)
+    {
+        int mem = 0;
+
+        for (int i = 0; i < max(a.num.size(), b.num.size()); ++i)
+        {
+            int temp = 0;
+
+            if (i < a.num.size()) temp += a.num[i];
+            if (i < b.num.size()) temp += b.num[i];
+            temp = temp + mem;
+            mem = temp / 10;
+            temp %= 10;
+            result.num.push_back(temp);
+        }
+
+        if (mem == 1) result.num.push_back(1);
+
+        reverse(result.num.begin(), result.num.end());
+    }
+
+    return result;// {num, sign}
+}
 
 vector<int> a, b, c;
 int sign_a, sign_b, sign_c;
@@ -96,11 +140,11 @@ int main()
     freopen_s(&OUT, "output.txt", "w", stdout);
 #endif // _DEBUG
 
-    string s1, s2, s3;
+    //string s1, s2, s3;
 
-    cin >> s1 >> s2 >> s3;
+    //cin >> s1 >> s2 >> s3;
 
-    a = Init(s1, sign_a);
+    /*a = Init(s1, sign_a);
 
     b = Init(s2, sign_b);
 
@@ -119,17 +163,44 @@ int main()
 
     pair< int, double > pr;
     pr.first = a;
-    pr.second = d;
+    pr.second = d;*/
+    //BigInt vv[5];
+
+    vector<BigInt> v(5);
+
+    for (int i = 0; i < v.size(); ++i)
+    {
+        v[i].Read();
+    }
+
+    for (int i = 0; i < v.size(); ++i)
+    {
+        v[i].Out();
+    }
 
 
 
-    //Объектно ориентированное
-    BigInt aa, bb, cc;
+    ////Объектно ориентированное
+    //BigInt aa, bb, cc, dd;
 
-    aa.Init(s1);
+    //aa.Init(s1);
 
-    bb.Init(s2);
+    //bb.Init(s2);
 
-    cc.Init(s3);
+    //cc.Init(s3);
+
+    //dd = Sum(aa, bb);
+
+    //dd.Out();
+
+    //aa.Out();
+
+    //bb.Out();
+
+   /* for (int i = 0; i < dd.num.size(); ++i)
+    {
+        cout << dd.num[i];
+    }*/
+
 
 }
