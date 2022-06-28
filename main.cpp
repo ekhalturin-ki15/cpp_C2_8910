@@ -3,6 +3,9 @@
 #include <queue>
 #include <algorithm>
 #include <list>
+#include <string>
+
+//#include <bits/stdc++.h>
 
 
 using namespace std;
@@ -75,8 +78,8 @@ BigInt Sum(BigInt a, BigInt b)
     return result;// {num, sign}
 }
 
-vector<int> a, b, c;
-int sign_a, sign_b, sign_c;
+//vector<int> a, b, c;
+//int sign_a, sign_b, sign_c;
 
 int n;
 int user_choose;
@@ -113,7 +116,7 @@ pair < vector<int>, int >  Sum(vector<int>& a, int& sign_a, vector<int>& b, int&
     res.first = num;
     res.second = sign;
 
-    return res;// {num, sign}
+    return  res;// { num, sign };
 };
 
 vector<int> Init(string startString, int& sign)
@@ -132,6 +135,72 @@ vector<int> Init(string startString, int& sign)
     return num;
 }
 
+
+struct long_long_long_int // 16 байт
+{
+    long long a; // 8 байт
+    long long b; // 8 байт
+};
+
+long_long_long_int c, d, ff; 
+
+
+struct People
+{
+
+    int x;
+    int y;
+
+    string name;
+
+
+    void Move(int dx, int dy)
+    {
+        x += dx;
+        y += dy;
+        cout << name + " " + std::to_string(x) + " " + std::to_string(y);
+        cout << "\n";
+    }
+
+    void Move()
+    {
+        x++;
+        y++;
+
+        cout << name + " " + std::to_string(x) + " " + std::to_string(y);
+        cout << "\n";
+    }
+
+
+    void Breath()
+    {
+        cout << name + " thzzzzz";
+        cout << "\n";
+    }
+};
+
+struct many_el
+//class many_el
+{
+//public:
+    int i;
+    char ch;
+    string s;
+    double d;
+    int j;
+    int a[50];
+    vector<int> m;
+    vector<vector<vector<int>>> vvv;
+
+
+
+
+};
+
+
+many_el zz, ashash;
+
+
 int main()
 {
 #ifdef _DEBUG
@@ -139,6 +208,28 @@ int main()
     freopen_s(&IN, "input.txt", "r", stdin);
     freopen_s(&OUT, "output.txt", "w", stdout);
 #endif // _DEBUG
+
+    ff.a = c.a + d.a;
+
+    zz.m = { 3, 4, 6, 54, 32, 2 };
+    
+    ashash.m = { 3, 4, 3, 2, 21 };
+
+    People Jack, Vladimir, Igor;
+
+    Jack.name = "Jack";
+    Vladimir.name = "Vladimir";
+    Igor.name = "Igor";
+
+    Jack.x = 10;
+    Jack.y = 50;
+
+    Igor.Breath();
+
+    Vladimir.Move(10, -40);
+
+    return 0;
+
 
     //string s1, s2, s3;
 
@@ -202,5 +293,9 @@ int main()
         cout << dd.num[i];
     }*/
 
+    //auto a = 23;
 
+
+
+    return 0;
 }
