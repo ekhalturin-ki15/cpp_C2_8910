@@ -6,10 +6,13 @@
 #include <string>
 #include <list>
 #include <stack>
+#include <forward_list>
 
 #include <iomanip>
 
 #include <unordered_map>
+
+#include <algorithm>
 
 
 using namespace std;
@@ -48,21 +51,16 @@ A sum(A l, A r)
 }
 
 
-struct Point
-{
-    int x;
-    int y;
-};
 
-
-Point Mid(Point l, Point r)
-{
-    Point m;
-    m.x = (l.x + r.x) / 2;
-    m.y = (l.y + r.y) / 2;
-
-    return m;
-}
+//
+//Point Mid(Point l, Point r)
+//{
+//    Point m;
+//    m.x = (l.x + r.x) / 2;
+//    m.y = (l.y + r.y) / 2;
+//
+//    return m;
+//}
 
 void inc(A& a)
 {
@@ -105,6 +103,12 @@ void func(int step)
 }
 
 
+struct Point
+{
+    int x;
+    string y;
+    int z;
+};
 
 int main()
 {
@@ -114,156 +118,203 @@ int main()
     freopen_s(&OUT, "output.txt", "w", stdout);
 #endif
 
+    //Point p;
+    //p.x = 1;
+    //p.y = 2;
+    //p.z = -1;
+    //auto [f, g, e] = p;
+
+    //g = "3424234";
+
+
+    cout.width(10);
+    cout << fixed;
+
+    cout << setprecision(10) << 1.34;
+
+
+    multimap<int, int > mmai;
+    mmai.find(1); // iterator
+    //Не перегружен []
+
+    //Лучше
+    map <int, vector< int > > mavi;
+
+    //mavi[1].front();
+
     func(0);
+    // <
+
+    map <int, int> mai;
+
+    mai[-1000] = 200;
+    mai[-1000] = 100;
+
+    map < vector<int>, int > mav;
+
+    mav[{1, 0, 1}]++;
+    mav[{0, 0, 1}]++;
+    mav[{1, 0, 1}]++;
+    mav[{1, 0, 1}]++;
+
+    map <string, int> ma;
+
+    ma["1224"] = 100;
+    ma[""] = -1;
+
+    cout << ma["1224"];
+    ma["1224"] = 999;
+    cout << "\n" << ma["1224"] << "\n";
+
+    ma["2"] = 2;
+    ma["1"] = 1;
+    ma["3"] = 3;
+
+    ma.erase("3");
+
+    for (map<string, int>::iterator it = ma.begin(); it != ma.end(); ++it)
+    {
+        //pair< const string, int> x = *it;
+        //cout << x.first <<" "<<x.second<<"\n";
+
+        // it->   ~   (*it). 
+        //Стрелочка - это получение по значению и обращение к полю
+
+        //cout << it->first << " " << it->second << "\n";
+        cout << (*it).first << " " << (*it).second << "\n";
+    }
+
+
+    // pair< const string, int> 
+
 
     //return 0;
-
-    int a = 0, b = 1;
 
     ios_base::sync_with_stdio(0);
     cin.tie(0); cout.tie(0);
 
-    cin >> a; // Считываем в секунду 2*10^6
+    multiset< string > ms;
+
+    ms.insert("aaa");
+    ms.insert("bbb");
+    ms.insert("00");
+    ms.insert("111");
+    ms.insert("abb");
+    ms.insert("ccc");
+    ms.insert("cccc");
+    ms.insert("00");
+    //ms.erase("00"); // Удалит все равные 
+    while (ms.find("00") != ms.end())
+        ms.erase(ms.find("00"));// Удалит один экземпляр по итератору
 
 
-    cout << a + b; // O(1) ~За секунду 10^7 
-
-    //От быстрых к медленым
-    // ^ | & << >> ~
-    //++    10^8
-    //--
-    //+
-    //-
-    //*
-    // /
-    // %    10^6
-    // && || ! == < >
+    set< string, greater<string> > s; // <
 
 
+    s.insert("aaa");
+    s.insert("bbb");
+    s.insert("00");
+    s.insert("111");
+    s.insert("abb");
+    s.insert("ccc");
+    s.insert("cccc");
+    s.insert("00"); // Все уникальные, копии игнорируются
+
+    s.erase(s.begin());
+
+    s.erase("aaa"); // А вот это вектор не умеет O(log n)
+
+    s.find("abb"); // O(log n) 
+    // log2 1e6 = 20
+    // 1024 ~ 1000   2^10 ~ 10^3
+    // 1024 * 1024 ~ 1e6
 
 
-    int n = 100;
-    for (int i = 0; i < n; ++i) // O(n)  - Линейная
-    {
-        cout << a + b; // O(1) -Константная
+    for (set< string >::iterator it = s.find("abb"); it != s.end(); ++it)
+        cout << *it <<"\n";
 
-    }
-
-
-
-    for (int i = 0; i < n; ++i) // O(n^2) - Квадратичная
-    {
-        for (int i = 0; i < n; ++i) // O(n) 
-        {
-            cout << a + b; // O(1) 
-
-        }
-    }
-
-    vector<int> v;
-    sort( v.begin(), v.end() ); // O(n * log n) 
-
-    for (int i = 1; i < n; i *= 2) // O(log n) - Логарифмическая
-    {
-        cout << a + b; // O(1) 
-    }
-
-
-    //v[i]; //O(1)
-
-    //[i]
-
-    // *(v + i)
-
-    int it = 5;
-    vector<int> m = { 0, 1, 2, 3, 4, 5 ,6 ,7 ,8, 9 };
-
-    vector<int> n_m = { 0, 1, 2, 3, 4 , 6 ,7 ,8, 9 };
-
-    for (int i = it; i < m.size() - 1; ++i)  // O(n)
-        m[i] = m[i + 1];
-
-    m.pop_back(); // O(1)
-
-    m.push_back(it); // O(1)
-
-
-   
-    vector<int> maa = { 0, 1, 2, 3, 4, 9 ,6 ,7 ,8 }; // Изменение порядка swap и pop_back
-
-    // deque
-    //queue<char> q;
-    //q.pop(); // Удаление с начала
-    //q.push('A'); //Добавление в конец
-    //q.emplace('L');////Добавление в конец конструирование на месте
-    //q.front();
-    //q.back();
-
-    //// Мы не можем узнать, кто в середине
-    //// vector с урезаным функционалом
-    //stack<int> st;
-
-    //st.push(100); //В конец
-    //st.pop(); //С конца
-    //st.top(); // Посмотреть с конца конца
-
-    //deque<int> de;
-
-    //de.pop_front();
-    //de[10];
-    //de.push_front(100);
-    //de.push_back(80);
-    //// Неверно *(de + 10)
-
-
-
-    list<int> ls;
     
-    ls.push_back(1);
-    ls.push_back(2);
-    ls.push_back(3);
+    //O(logN) 
 
-    ls.insert(ls.begin(), 5);
+    vector<string> v;
+    v.push_back("aaa");
+    v.push_back("bbb");
+    v.push_back("00");
+    v.push_back("abb");
+    v.push_back("00");
 
-    list<int>::iterator ls_it = ls.begin();
-    ++++ls_it;
-    ls.insert(ls_it, 10); 
-    ls.insert(ls_it, 11); 
-    ls.insert(ls_it, 12); 
-    ls.insert(ls_it, 11);
-    ls.insert(ls_it, 11);
-    ls.erase(ls_it);
+    sort(v.begin(), v.end(), less<string>() ); // Но это быстрее
 
-    ls.erase(ls.begin());
+    set<int> ns; // Но в обратном порядке
 
-    cout <<  "\n";
-    /*for (list<int>::iterator ls_it = ls.begin();
-        ls_it != ls.end();
-        ++ls_it)
+    int x = 5;
+
+    ns.insert(-x);
+
+
+
+
+    sort(v.begin(), v.end(), greater<string>()); // Но это быстрее
+
+    //Требуется <
+
+    // Похоже на set
+
+    // 
+    //priority_queue<int, vector<int>, greater<int>> pq;
+    priority_queue<int> pq;//Обертка над vector, превращёный в heap при помощи make_heap
+
+    //Быстрее set (Поиск кратчайшего пути в графе через Дейкстра priority_queue)
+
+    pq.push(-5); 
+    pq.push(-3);
+    pq.push(-1);
+    pq.push(-2);
+    pq.push(-4);
+    
+
+    
+    cout << -pq.top() << "\n"; //Первый элемент (максимум) (который удаляется pop)
+    pq.pop(); // Удаляем наибольший
+    cout <<  -pq.top();
+
+    vector<int> vv;
+    vv= { 1, 2, 3, 4, 5 };
+    //Куча
+    make_heap(vv.begin(), vv.end());
+
+    pop_heap(vv.begin(), vv.end());
+    vv.pop_back();
+
+    vv.push_back(2);
+    push_heap(vv.begin(), vv.end());
+
+    //У vector<int> нет хэширование
+    //unordered_map<vector<int>, int> ucm;
+
+    //Ключ - те данные, которые хэшируемые
+    unordered_map<int, int> um;
+
+    um[234234] = 1; // O(1) преимущество только при size > 1e7
+    um[11212] = 2;
+    um[5435435] = 3;
+    um[854] = 4;
+    um[45343] = 5;
+
+    // (cpp 17) контертест всегда колизии //X * 107897
+
+    cout << "\n" << "\n" << "\n" << "\n"<<um[5435435] << "\n";
+
+
+
+
+
+    for (auto [l, r] : um) // cpp 17 >
     {
-        cout << *ls_it << "\n";
-
-    }*/
-
-
-    for (list<int>::iterator next, ls_it = ls.begin();
-        ls_it != ls.end();
-        ls_it = next)
-    {
-
-        next = ++ls_it;
-        --ls_it;
-
-        if ((*ls_it) == 11)
-        {
-            ls.erase(ls_it);
-            
-            continue;
-        }
-
-        cout << *ls_it << "\n";
-
+        cout << l << " " << r <<"\n";
     }
+
+
 
 
 }
