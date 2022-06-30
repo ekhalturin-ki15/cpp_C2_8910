@@ -6,6 +6,7 @@
 #include <cstdio>
 
 #include <iostream>
+#include <iomanip>
 
 #include <vector>
 
@@ -132,6 +133,10 @@ int main()
 
 	//cin >> n;
 
+	//float f = 10.32;
+
+	//cout<<  setprecision(10) << f;
+		
 	Rib r;
 	while (cin >> r.from >> r.to >> r.dis)
 	{
@@ -159,6 +164,21 @@ int main()
 
 	dfs('A', 0);
 
+	//Поочерёдное Копирование объектов из структуры данных 
+
+	auto aa = 20;
+	auto& bb = aa;
+
+	for (auto it : graph) // iterarot = begin() -> end()
+	{
+		it.dis = 100;
+	}
+
+	//Поочерёдное получение (оригинала) объектов из структуры данных 
+	for (auto& it : graph) // iterarot = begin() -> end()
+	{
+		it.dis = 100;
+	}
 
 	return 0;
 
