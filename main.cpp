@@ -7,7 +7,10 @@
 #include <iomanip>
 #include <vector>
 #include <map>
+#include <set>
+#include <queue>
 #include <algorithm>
+#include <string>
 
 using namespace std;
 
@@ -19,8 +22,25 @@ using namespace std;
 #endif
 
 
+struct A
+{
+	float f;
+	int a;
+	string s;
+	
+
+};
+
 int main()
 {
+
+	vector<int> v = { 3 , 4 ,3 , 2, 3, 4 };
+	A a;
+	a = {1.323, 3, "aaa" };
+
+	auto& [x, y, z] = a;
+
+	x = 100;
 
 #ifdef _DEBUG
 	FILE* IN, * OUT;
@@ -28,56 +48,41 @@ int main()
 	freopen_s(&OUT, "output.txt", "w", stdout);
 #endif
 
-	vector<int> v;
-	int a, x;
+	string s;
 
-	cin >> x;
+	int n;
+	cin >> n; cin.ignore();
 
-	while (cin >> a)
-		v.push_back(a);
-
-	sort(v.begin(), v.end());
+	getline(cin, s);
 
 
+	map< string, int > m;
 
-	int l = 0; int r = v.size(); //[l r)  [0 1)  самый последний индекс где значение равно x
-
-	while (l != r - 1)
+	for (int i = 0; i < s.size() - n; ++i)
 	{
-		//int m = (l + r) / 2;
-		int m = l + (r - l) / 2;
-		if (v[m] > x)
-		{
-			r = m;
-		}
-		if (v[m] <= x)
-		{
-			l = m;
-		}
+		
+		cout << s.substr(i, n) << "\n";
+		m[s.substr(i, n)]++;
+
+
+
+		//while (s.find("2323") != string::npos)
+		//{
+		//}
+
 	}
 
-	//cout << v[l];
-
-	// Ѕин поиск, поэтому на вход  отсортированные, иначе непон¤тно что вернЄт
-
-	auto it = lower_bound(v.begin(), v.end(), x); // возвращает iterator ближайший >=
-
-	auto end = upper_bound(v.begin(), v.end(), x); //    ближайший >
-
-	cout << distance(v.begin(), it) << " ";
-
-	cout << distance(v.begin(), end)<< " ";
-
-	cout << "\n";
-
-
-
-	// distance O(n) в случае если нет индексов
-	for (int i = distance(v.begin(), it); i < distance(v.begin(), end); ++i)
+	for (auto it : m)
 	{
-		cout << v[i];
-		cout << " ";
+		cout << it.first << " " << it.second << "\n";
 	}
+
+	for (auto [key, val] : m)
+	{
+		cout << key << " " << val << "\n";
+	}
+
+
 
 
 
