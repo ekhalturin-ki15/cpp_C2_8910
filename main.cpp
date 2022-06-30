@@ -87,14 +87,14 @@ struct Rib
 
 vector<Rib> graph;
 
-map< char, int > total_dis;//Нет циклов -> Один путь  поиск дистанции
+map< char, int > total_dis;//РќРµС‚ С†РёРєР»РѕРІ -> РћРґРёРЅ РїСѓС‚СЊ  РїРѕРёСЃРє РґРёСЃС‚Р°РЅС†РёРё
 
 void dfs(char ch, int dis)
 {
 	cout << ch << " ";
 
 
-	//total_dis[ch]; // Если его небыло total_dis[ch] = 0
+	//total_dis[ch]; // Р•СЃР»Рё РµРіРѕ РЅРµР±С‹Р»Рѕ total_dis[ch] = 0
 	if (total_dis.count(ch))
 	{
 		if (dis < total_dis[ch])
@@ -138,7 +138,7 @@ int main()
 		graph.push_back(r);
 	}
 
-	////dfs - deep - first - search (поиск в глубину)
+	////dfs - deep - first - search (РїРѕРёСЃРє РІ РіР»СѓР±РёРЅСѓ)
 
 
 
