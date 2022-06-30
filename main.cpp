@@ -2,15 +2,12 @@
 #include <stdlib.h>
 #include <crtdbg.h>
 #include <fstream>
-
 #include <cstdio>
-
 #include <iostream>
 #include <iomanip>
-
 #include <vector>
-
 #include <map>
+#include <algorithm>
 
 using namespace std;
 
@@ -20,104 +17,6 @@ using namespace std;
 #ifdef _DEBUG
 #pragma warning (disable : 4996)
 #endif
-
-struct Rect
-{
-	int n;
-
-	vector<int> v;
-
-	void rect(int i)
-	{
-		if (i < n)
-		{
-			//cout << i << " ";
-
-			v[i] = i;
-
-			rect(i + 1);
-
-			v[i] = i + 1;
-
-			rect(i + 1);
-
-			v[i] = i + 2;
-
-			rect(i + 1);
-
-			return; // ->rect(i - 1);
-		}
-		else
-		{
-			for (auto it : v)
-				cout << it << " ";
-
-
-			cout << "\n";
-
-			return;
-		}
-	}
-};
-//
-//void rect(int i)
-//{
-//	if (i < n)
-//	{
-//		//cout << i << " ";
-//
-//		rect(i + 1);
-//
-//		cout << i << " ";
-//
-//		return; // ->rect(i - 1);
-//	}
-//	else
-//	{
-//		return;
-//	}
-//}
-
-struct Rib
-{
-	char from;
-	char to;
-	int dis;
-
-};
-
-vector<Rib> graph;
-
-map< char, int > total_dis;//Нет циклов -> Один путь  поиск дистанции
-
-void dfs(char ch, int dis)
-{
-	cout << ch << " ";
-
-
-	//total_dis[ch]; // Если его небыло total_dis[ch] = 0
-	if (total_dis.count(ch))
-	{
-		if (dis < total_dis[ch])
-			total_dis[ch] = dis;
-	}
-	else
-		total_dis[ch] = dis;
-
-
-	for (int i = 0; i < graph.size(); ++i)
-	{
-		if (graph[i].from == ch)
-		{
-			cout << "->";
-			dfs(graph[i].to, total_dis[ch] + graph[i].dis);
-			cout << "->";
-			cout << ch;
-		}
-	}
-	
-	return;
-}
 
 
 int main()
@@ -129,60 +28,61 @@ int main()
 	freopen_s(&OUT, "output.txt", "w", stdout);
 #endif
 
-	int n;
+	vector<int> v;
+	int a, x;
 
-	//cin >> n;
+	cin >> x;
 
-	//float f = 10.32;
+	while (cin >> a)
+		v.push_back(a);
 
-	//cout<<  setprecision(10) << f;
-		
-	Rib r;
-	while (cin >> r.from >> r.to >> r.dis)
+	sort(v.begin(), v.end());
+
+
+
+	int l = 0; int r = v.size(); //[l r)  [0 1)  самый последний индекс где значение равно x
+
+	while (l != r - 1)
 	{
-		graph.push_back(r);
+		//int m = (l + r) / 2;
+		int m = l + (r - l) / 2;
+		if (v[m] > x)
+		{
+			r = m;
+		}
+		if (v[m] <= x)
+		{
+			l = m;
+		}
 	}
 
-	////dfs - deep - first - search (поиск в глубину)
+	//cout << v[l];
+
+	// Ѕин поиск, поэтому на вход  отсортированные, иначе непон¤тно что вернЄт
+
+	auto it = lower_bound(v.begin(), v.end(), x); // возвращает iterator ближайший >=
+
+	auto end = upper_bound(v.begin(), v.end(), x); //    ближайший >
+
+	cout << distance(v.begin(), it) << " ";
+
+	cout << distance(v.begin(), end)<< " ";
+
+	cout << "\n";
 
 
 
-	//cin >> n;
-
-	//for (int i = 0; i < n; ++i)
-	//{
-	//	cout << i << " ";
-	//}
-	//cout << "\n";
-
-	//Rect r;
-	//r.n = n;
-	//r.v.resize(n);
-
-
-	//r.rect(0);
-
-	dfs('A', 0);
-
-	//Поочерёдное Копирование объектов из структуры данных 
-
-	auto aa = 20;
-	auto& bb = aa;
-
-	for (auto it : graph) // iterarot = begin() -> end()
+	// distance O(n) в случае если нет индексов
+	for (int i = distance(v.begin(), it); i < distance(v.begin(), end); ++i)
 	{
-		it.dis = 100;
+		cout << v[i];
+		cout << " ";
 	}
 
-	//Поочерёдное получение (оригинала) объектов из структуры данных 
-	for (auto& it : graph) // iterarot = begin() -> end()
-	{
-		it.dis = 100;
-	}
+
+
 
 	return 0;
-
-
 }
 
 
