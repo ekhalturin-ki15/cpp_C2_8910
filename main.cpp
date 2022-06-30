@@ -87,11 +87,14 @@ struct Rib
 
 vector<Rib> graph;
 
-map< char, int > total_dis;
+map< char, int > total_dis;//Нет циклов -> Один путь  поиск дистанции
 
 void dfs(char ch, int dis)
 {
-	//min_dis[ch]; // Если его небыло min_dis[ch] = 0
+	cout << ch << " ";
+
+
+	//total_dis[ch]; // Если его небыло total_dis[ch] = 0
 	if (total_dis.count(ch))
 	{
 		if (dis < total_dis[ch])
@@ -104,10 +107,15 @@ void dfs(char ch, int dis)
 	for (int i = 0; i < graph.size(); ++i)
 	{
 		if (graph[i].from == ch)
+		{
+			cout << "->";
 			dfs(graph[i].to, total_dis[ch] + graph[i].dis);
+			cout << "->";
+			cout << ch;
+		}
 	}
-
-
+	
+	return;
 }
 
 
@@ -122,13 +130,11 @@ int main()
 
 	int n;
 
-	cin >> n;
+	//cin >> n;
 
-	FORI(n)
+	Rib r;
+	while (cin >> r.from >> r.to >> r.dis)
 	{
-		Rib r;
-		cin >> r.from >> r.to >> r.dis;
-
 		graph.push_back(r);
 	}
 
