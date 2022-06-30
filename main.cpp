@@ -50,40 +50,43 @@ int main()
 
 	string s;
 
-	int n;
-	cin >> n; cin.ignore();
+	int n, k;
+	cin >> n; 
+	k = n;
+	vector<int> pr = { 2 };
 
-	getline(cin, s);
-
-
-	map< string, int > m;
-
-	for (int i = 0; i < s.size() - n; ++i)
+	while (k % 2 == 0)
 	{
-		
-		cout << s.substr(i, n) << "\n";
-		m[s.substr(i, n)]++;
-
-
-
-		//while (s.find("2323") != string::npos)
-		//{
-		//}
-
+		k /= 2;
+		cout << 2 << "*";
 	}
 
-	for (auto it : m)
+	for (int i = 3; i <= sqrt(n); ++i)
 	{
-		cout << it.first << " " << it.second << "\n";
+		bool fl = true;
+		for (int j = 0; pr[j] <= sqrt(i); ++j)
+		{
+			if (i % pr[j] == 0)
+			{
+				fl = false;
+				break;
+			}
+		}
+		if (fl)
+		{
+			pr.push_back(i);
+			while (k % i == 0)
+			{
+				k /= i;
+				cout << i << "*";
+			}
+		}
 	}
 
-	for (auto [key, val] : m)
+	if (k > 1)
 	{
-		cout << key << " " << val << "\n";
+		cout << k << "*";
 	}
-
-
-
 
 
 
