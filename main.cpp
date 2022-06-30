@@ -7,134 +7,157 @@
 
 #include <iostream>
 
+#include <vector>
+
+#include <map>
+
 using namespace std;
 
+#define FOR for(int i = 0; i < n; ++i)
+#define FORI(n) for(int i = 0; i < n; ++i)
+
 #ifdef _DEBUG
-	#pragma warning (disable : 4996)
+#pragma warning (disable : 4996)
 #endif
 
-int main()
+struct Rect
 {
-	int a, b; // целочисленное 32 бит (4 байтовое) -> -2^31 2^31 - 1
-	unsigned int ua; // не отр натуральные 32 бит (4 байта) -> 0 2^32 - 1
+	int n;
 
-	long long la; // целочисленное 64 бит (8 байтовое) -> -2^63 2^63 - 1
-	unsigned long long ula;
+	vector<int> v;
 
-	float f; // вещественные зщначения (4 байт)  не точный 
-	double df; // вещественные зщначения (8 байт)  не точный 
-	long double ldf; // вещественные зщначения (10 байт)  не точный 
-					// extendet
-
-	char ch; // 1 байт работа с символами [0 256) ascii
-
-	bool bl; // 0 1
-	bool bl2; 
-
-
-	constexpr int C_SIZE = 34 + 2323;
-
-	const int SIZE = 10000;
-	int mas_a[SIZE]; //
-
-	mas_a[0] = 100;
-
-
-	//printf("%d\n", *mas_a);
-	//printf("%d\n", mas_a[0]);
-
-	std::ios_base::sync_with_stdio(0);
-	std::cout.tie(0);
-
-	//std::cout << ~1;
-
-
-	b = 10;
-
-	int *mas_b, *mas_c;
-
-	mas_b = new int;
-
-	mas_c = new int [b];
-
-
-	mas_c[2323];
-	// *(mas_c + 2323)
-
-
-	
-	delete mas_b;
-	delete [] mas_c;
-
-
-
-
-	//char mc[100][10][2][2][2]; // 100*10*2*2*2
-	//mc[2][3][1][1][0];
-	char mc[5][3];
-	// массив указателей -> значения прямоугольная (матрица)
-
-	char** dmc = nullptr; // матрица ступенчатого вида
-	int* dmc_size = nullptr;
-	int q;
-
-
-
-	ifstream in("input.txt");
-
-	in >> q;
-
-	dmc = new char* [q];
-	dmc_size = new int [q];
-
-	//cin.ignore(0);
-
-	for (int y = 0; y < q; ++y)
+	void rect(int i)
 	{
-		in >> dmc_size[y];
-		
-		in.ignore();
-		in.ignore();
-		in.ignore();
-
-		dmc[y] = new char [dmc_size[y]];
-
-		for (int x = 0; x < dmc_size[y]; ++x)
+		if (i < n)
 		{
-			in >> dmc[y][x];
+			//cout << i << " ";
+
+			v[i] = i;
+
+			rect(i + 1);
+
+			v[i] = i + 1;
+
+			rect(i + 1);
+
+			v[i] = i + 2;
+
+			rect(i + 1);
+
+			return; // ->rect(i - 1);
+		}
+		else
+		{
+			for (auto it : v)
+				cout << it << " ";
+
+
+			cout << "\n";
+
+			return;
 		}
 	}
+};
+//
+//void rect(int i)
+//{
+//	if (i < n)
+//	{
+//		//cout << i << " ";
+//
+//		rect(i + 1);
+//
+//		cout << i << " ";
+//
+//		return; // ->rect(i - 1);
+//	}
+//	else
+//	{
+//		return;
+//	}
+//}
 
+struct Rib
+{
+	char from;
+	char to;
+	int dis;
 
-	for (int y = 0; y < q; ++y)
+};
+
+vector<Rib> graph;
+
+map< char, int > total_dis;
+
+void dfs(char ch, int dis)
+{
+	//min_dis[ch]; // Если его небыло min_dis[ch] = 0
+	if (total_dis.count(ch))
 	{
-		for (int x = 0; x < y; ++x)
-		{
-			if (x >= dmc_size[y]) cout << "-";
-			else cout << dmc[y][x];
-			cout << " ";
-		}
-		cout << "\n";
+		if (dis < total_dis[ch])
+			total_dis[ch] = dis;
 	}
-
-	
-
-
+	else
+		total_dis[ch] = dis;
 
 
-	for (int y = 0; y < q; ++y)
+	for (int i = 0; i < graph.size(); ++i)
 	{
-		delete[] dmc[y];
+		if (graph[i].from == ch)
+			dfs(graph[i].to, total_dis[ch] + graph[i].dis);
 	}
-
-	delete[] dmc;
-	delete[] dmc_size;
-
-	_CrtDumpMemoryLeaks();
-
-	return 0; 
 
 
 }
+
+
+int main()
+{
+
+#ifdef _DEBUG
+	FILE* IN, * OUT;
+	freopen_s(&IN, "input.txt", "r", stdin);
+	freopen_s(&OUT, "output.txt", "w", stdout);
+#endif
+
+	int n;
+
+	cin >> n;
+
+	FORI(n)
+	{
+		Rib r;
+		cin >> r.from >> r.to >> r.dis;
+
+		graph.push_back(r);
+	}
+
+	////dfs - deep - first - search (поиск в глубину)
+
+
+
+	//cin >> n;
+
+	//for (int i = 0; i < n; ++i)
+	//{
+	//	cout << i << " ";
+	//}
+	//cout << "\n";
+
+	//Rect r;
+	//r.n = n;
+	//r.v.resize(n);
+
+
+	//r.rect(0);
+
+	dfs('A', 0);
+
+
+	return 0;
+
+
+}
+
 
 
