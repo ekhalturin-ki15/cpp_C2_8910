@@ -1,4 +1,13 @@
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+#include <fstream>
+
 #include <cstdio>
+
+#include <iostream>
+
+using namespace std;
 
 #ifdef _DEBUG
 	#pragma warning (disable : 4996)
@@ -23,114 +32,105 @@ int main()
 	bool bl2; 
 
 
-	int abl;
-	//cppreference
+	constexpr int C_SIZE = 34 + 2323;
+
+	const int SIZE = 10000;
+	int mas_a[SIZE]; //
+
+	mas_a[0] = 100;
+
+
+	//printf("%d\n", *mas_a);
+	//printf("%d\n", mas_a[0]);
+
+	std::ios_base::sync_with_stdio(0);
+	std::cout.tie(0);
+
+	//std::cout << ~1;
+
+
+	b = 10;
+
+	int *mas_b, *mas_c;
+
+	mas_b = new int;
+
+	mas_c = new int [b];
+
+
+	mas_c[2323];
+	// *(mas_c + 2323)
+
+
 	
-	//scanf(" %d %d", &a, &b);
-	//scanf("%d %c %d %f", &a, &ch, &abl, &f);
-
-	//printf("%d\t\t\n%d", a % b, a - (a / b) * b);
-
-	//printf("%d %c %d %f", 1000 , ch, bl, f);
-
-	// + - * / % 
-
-	// & | ^ ~ << >>
-
-	// && || < > == != !
-
-	a = 0xd6;
-
-
-	printf("\t\t%x", a | 0x31);
-	printf("\t\t%x", a & 0x31);
-	printf("\t\t%x", a ^ 0x31);
-	printf("\t\t%x", a >> 2); // 0x35
-	printf("\t\t%x", a << 3); // 0x6b0
-	printf("\t\t%d", ~0); // -1
-
-	printf("\t\t%d", a && 0);
+	delete mas_b;
+	delete [] mas_c;
 
 
 
-	//a = 500 % 3;
-	//a = 500 - (500 / 3) * 3;
+
+	//char mc[100][10][2][2][2]; // 100*10*2*2*2
+	//mc[2][3][1][1][0];
+	char mc[5][3];
+	// массив указателей -> значения прямоугольная (матрица)
+
+	char** dmc = nullptr; // матрица ступенчатого вида
+	int* dmc_size = nullptr;
+	int q;
 
 
-	if (true)
+
+	ifstream in("input.txt");
+
+	in >> q;
+
+	dmc = new char* [q];
+	dmc_size = new int [q];
+
+	//cin.ignore(0);
+
+	for (int y = 0; y < q; ++y)
 	{
-		a + 1 + 4;
-		b = a + 2;
-	}
-	else
-	{
+		in >> dmc_size[y];
+		
+		in.ignore();
+		in.ignore();
+		in.ignore();
 
-	}
+		dmc[y] = new char [dmc_size[y]];
 
-
-	a = (true ? 100 : 323 ); //  100
-	a = (false ? 100 : 323); // 323
-
-layble:
-	switch (23)
-	{
-	case 1:
-
-
-		break;
-	case 2:
-
-		if (1)
+		for (int x = 0; x < dmc_size[y]; ++x)
 		{
-
-		}
-		break;
-
-	}
-
-	//for ( A ; B  ; C )
-
-	//A -- начальная инициализация 
-	//B -- пока true цикл выполняется
-	//C -- шаг цикла, выполняется в конце тела цикла
-
-
-	//A -> B -> команды -> C -> B -> команды -> C ->.... 
-	{
-		int i = 0; // A
-		for (; ; ++i) // принято исп. с известным кол-во шагов
-		{
-			if (!(i < 10)) break; // B
-
-			continue; // Попадаем в блок C
+			in >> dmc[y][x];
 		}
 	}
 
-	// только блок B
-	//while (В) // принято исп. мы не знаем кол-во шагов
-	while (true)
-	{
 
-		continue; // B
+	for (int y = 0; y < q; ++y)
+	{
+		for (int x = 0; x < y; ++x)
+		{
+			if (x >= dmc_size[y]) cout << "-";
+			else cout << dmc[y][x];
+			cout << " ";
+		}
+		cout << "\n";
 	}
 
+	
 
-	//Цикл с постусловием
-	do
+
+
+
+	for (int y = 0; y < q; ++y)
 	{
+		delete[] dmc[y];
+	}
 
-		continue; // B
-	} while (true); // B
+	delete[] dmc;
+	delete[] dmc_size;
 
-
-	if (a == 5) // je jne в asm
-		goto layble; //jmp в asm
-
-
-
-
-
-
+	_CrtDumpMemoryLeaks();
 
 	return 0; 
 
